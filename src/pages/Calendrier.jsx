@@ -1,9 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import ReactCalendar from 'react-calendar';
 import { add, format } from 'date-fns';
-import { OPENING_HOURS_BEGINNING , OPENING_HOURS_END, OPENING_HOURS_INTERVAL } from '../constans/config'
+import '../styles/Days.css';
+import Button from '@mui/material/Button';
+import { OPENING_HOURS_BEGINNING, OPENING_HOURS_END, OPENING_HOURS_INTERVAL } from '../constants/config';
 
-const Calendar = ({}) => {
+const Calendar = () => {
   const [date, setDate] = useState({
     justDate: null,
     dateTime: null,
@@ -14,12 +16,10 @@ const Calendar = ({}) => {
 
     const { justDate } = date;
 
-    const beginning = add(justDate, { hours: OPENING_HOURS_BEGINNING}); // opening time
+    const beginning = add(justDate, { hours: OPENING_HOURS_BEGINNING }); // opening time
     const end = add(justDate, { hours: OPENING_HOURS_END }); // closing time
     const interval = OPENING_HOURS_INTERVAL; // in min
-
-   
-    const times= []; 
+    const times = [];
 
     for (let i = beginning; i <= end; i = add(i, { minutes: interval })) {
       times.push(i);
@@ -30,13 +30,17 @@ const Calendar = ({}) => {
 
   const times = getTimes();
 
+  const handleGoBack = () => {
+    setDate((prev) => ({ ...prev, justDate: null, dateTime: null }));
+  };
+
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
+    <div className="datedisp">
       {date.justDate ? (
-        <div className="flex gap-4">
+        <div className="days">
           {times?.map((time, i) => (
-            <div key={`time-${i}`} className="rounded-sm bg-gray-100 p-2">
-              <button
+            <div key={`time-${i}`} className="hours">
+                     <button
                 type="button"
                 onClick={() => setDate((prev) => ({ ...prev, dateTime: time }))}
               >
@@ -52,6 +56,13 @@ const Calendar = ({}) => {
           view="month"
           onClickDay={(date) => setDate((prev) => ({ ...prev, justDate: date }))}
         />
+      )}
+      {date.justDate && (
+        <div className="center">
+          <Button variant="contained" type="button" onClick={handleGoBack}>
+            Go back to Calendar
+          </Button>
+        </div>
       )}
     </div>
   );
