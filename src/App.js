@@ -7,10 +7,15 @@ import Account from './pages/Account';
 import Home from './pages/Home';
 import Signin from './pages/Signin';
 import './styles/Calendar.css'
+import calendarBg from'./images/calendar-bg.png'
+
 
 function App() {
   return (
-    <div>
+    <div style={{ backgroundImage: `url(${calendarBg})`, 
+    backgroundSize: 'cover', 
+    backgroundRepeat: 'no-repeat', 
+    height: '100vh' }}>
       <AuthContextProvider>
         <Navbar />
         <Routes>
@@ -24,6 +29,7 @@ function App() {
               </Protected>
             }
           />
+        
         </Routes>
       </AuthContextProvider>
     </div>

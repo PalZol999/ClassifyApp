@@ -4,6 +4,8 @@ import { add, format } from 'date-fns';
 import '../styles/Days.css';
 import Button from '@mui/material/Button';
 import { OPENING_HOURS_BEGINNING, OPENING_HOURS_END, OPENING_HOURS_INTERVAL } from '../constants/config';
+import Workout from "../components/Workout"
+
 
 const Calendar = () => {
   const [date, setDate] = useState({
@@ -38,16 +40,22 @@ const Calendar = () => {
     <div className="datedisp">
       {date.justDate ? (
         <div className="days">
-          {times?.map((time, i) => (
-            <div key={`time-${i}`} className="hours">
-                     <button
-                type="button"
-                onClick={() => setDate((prev) => ({ ...prev, dateTime: time }))}
-              >
-                {format(time, 'kk:mm')}
-              </button>
-            </div>
-          ))}
+          <div className='text-center pt-6'>
+          <Workout selectedDate={date.justDate} />
+          </div>
+          <div className="hours flex flex-wrap justify-center">
+            <div style={{ color: 'white' }}> Choose your class:</div>
+            {times?.map((time, i) => (
+              <div key={`time-${i}`} className="hours">
+                <button style={{ color: 'white' }}
+                  type="button"
+                  onClick={() => setDate((prev) => ({ ...prev, dateTime: time }))}
+                >
+               {format(time, 'kk:mm')}
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <ReactCalendar

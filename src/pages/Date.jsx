@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { add, format } from 'date-fns';
 import { OPENING_HOURS_BEGINNING , OPENING_HOURS_END, OPENING_HOURS_INTERVAL } from '../constans/config'
 
+
 const DateCompo = ({}) => {
   const [date, setDate] = useState({
     justDate: null,
@@ -28,7 +29,9 @@ const DateCompo = ({}) => {
   const times = getTimes();
 
   return (
+
         <div className="flex flex-wrap gap-4 justify-center">
+     
           {times?.map((time, i) => (
             <div key={`time-${i}`} className="rounded-sm bg-gray-100 p-2">
               <button
@@ -37,6 +40,7 @@ const DateCompo = ({}) => {
               >
                 {format(time, 'kk:mm')}
               </button>
+              
             </div>
           ))}
         </div>
