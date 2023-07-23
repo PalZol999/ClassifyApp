@@ -116,7 +116,10 @@
 #bg {
   background-image: url(./images/bg_img_seul.png);
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 100%;
+  height: 150vh;
 }
 
 #text {
