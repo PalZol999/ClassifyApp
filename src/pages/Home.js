@@ -12,7 +12,7 @@ const Home = () => {
           <Navbar />
         </nav>
         <ParallaxLayer offset={0} speed={0}>
-          <div className="animation_layer parallax" id="bg"></div>
+          <div className="animation_layer parallax" id="bg" style={{ width: '100%'}}></div>
         </ParallaxLayer>
         <ParallaxLayer offset={0} speed={0.4}>
           <div className="animation_layer parallax" id="text"></div>
@@ -27,6 +27,4 @@ const Home = () => {
 
 export default Home
 
-/*<nav className="navbar">
-<Navbar />
-</nav>*/
+/* width: 100%*/
