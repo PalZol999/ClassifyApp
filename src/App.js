@@ -6,6 +6,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import Account from './pages/Account';
 import Home from './pages/Home';
 import Signin from './pages/Signin';
+import { Helmet } from 'react-helmet'; 
 import './styles/Calendar.css'
 import calendarBg from'./images/calendar-bg.png'
 
@@ -16,6 +17,11 @@ function App() {
     backgroundSize: 'cover', 
     backgroundRepeat: 'no-repeat', 
     height: '100vh' }}>
+
+       <Helmet>
+        <title>Calssify App</title>
+      </Helmet>
+
       <AuthContextProvider>
         <Navbar />
         <Routes>

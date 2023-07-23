@@ -115,6 +115,8 @@
 
 #bg {
   background-image: url(./images/bg_img_seul.png);
+  background-size: cover;
+  width: 100%;
 }
 
 #text {
