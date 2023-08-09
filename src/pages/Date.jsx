@@ -1,23 +1,26 @@
 import React, { useState } from 'react';
 import { add, format } from 'date-fns';
-import { OPENING_HOURS_BEGINNING , OPENING_HOURS_END, OPENING_HOURS_INTERVAL } from '../constans/config'
+import ConfirmationPopup from "./ConfirmationPopup"; 
+import Workout from "../components/Workout"
+import { OPENING_HOURS_BEGINNING, OPENING_HOURS_END, OPENING_HOURS_INTERVAL } from '../constants/config';
 
-
-const DateCompo = ({}) => {
+const DateCompo = () => {
   const [date, setDate] = useState({
     justDate: null,
     dateTime: null,
   });
 
-  const getTimes = () => {
+const [showPopup, setShowPopup] = useState(false); // State for showing/hiding the popup
+
+const getTimes = () => {
     if (!date.justDate) return;
 
     const { justDate } = date;
 
-    const beginning = add(justDate, { hours: OPENING_HOURS_BEGINNING}); // opening time
+    const beginning = add(justDate, { hours: OPENING_HOURS_BEGINNING }); // opening time
     const end = add(justDate, { hours: OPENING_HOURS_END }); // closing time
     const interval = OPENING_HOURS_INTERVAL; // in min
-    const times= []; 
+    const times = [];
 
     for (let i = beginning; i <= end; i = add(i, { minutes: interval })) {
       times.push(i);
@@ -28,23 +31,53 @@ const DateCompo = ({}) => {
 
   const times = getTimes();
 
-  return (
-
-        <div className="flex flex-wrap gap-4 justify-center">
-     
-          {times?.map((time, i) => (
-            <div key={`time-${i}`} className="rounded-sm bg-gray-100 p-2">
-              <button
-                type="button"
-                onClick={() => setDate((prev) => ({ ...prev, dateTime: time }))}
-              >
-                {format(time, 'kk:mm')}
-              </button>
-              
-            </div>
-          ))}
-        </div>
-  );
+  const handleGoBack = () => {
+    setDate((prev) => ({ ...prev, justDate: null, dateTime: null }));
   };
+
+  const handleTimeClick = (time) => {
+    setDate((prev) => ({ ...prev, dateTime: time }));
+    setShowPopup(true); // Show the popup when a time is clicked
+  };
+
+  const handleYesClick = () => {
+    // Implement the logic to add the user to the class here
+    setShowPopup(false);
+  };
+
+  const handleNoClick = () => {
+    setShowPopup(false);
+  };
+
+  return (
+    <div>
+       <div className="days">
+          <div className='text-center pt-6'>
+            <Workout selectedDate={date.justDate} />
+          </div>
+          <div className=" flex flex-wrap justify-center">
+            <div style={{ color: 'white' }}> Choose your class:</div>
+            {times?.map((time, i) => (
+              <div key={`time-${i}`} className="hours">
+                <button style={{ color: 'white' }}
+                  type="button"
+                  onClick={() => setDate((prev) => ({ ...prev, dateTime: time }))}
+                >
+               {format(time, 'kk:mm')}
+                </button>
+              </div>
+            ))}
+            
+          </div>
+        </div>
+      
+      <ConfirmationPopup
+        show={showPopup}
+        onYes={handleYesClick}
+        onNo={handleNoClick}
+      />
+    </div>
+  );
+};
 
 export default DateCompo;

@@ -13,10 +13,6 @@ import calendarBg from'./images/calendar-bg.png'
 
 function App() {
   return (
-   /* <div style={{ backgroundImage: `url(${calendarBg})`, 
-    backgroundSize: 'cover', 
-    backgroundRepeat: 'no-repeat', 
-    height: '100vh' }}>*/
 <div>
        <Helmet>
         <title>Calssify App</title>

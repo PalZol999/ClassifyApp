@@ -5,11 +5,39 @@ import { format } from 'date-fns';
 
 const Workout = ({ selectedDate }) => {
   const wodData = {
-    '24/07/2023': {
+    '11/08/2023': {
       strength: ['12 biceps curls', '12 hollow rocks'],
       wod: ['400m run', '12 US swings at 24/16kg', '12 C2B/PU'],
     },
-    // Add more entries for other dates if needed
+    '14/08/2023': {
+      strength: ['12 biceps curls', '12 hollow rocks'],
+      wod: ['400m run', '12 US swings at 24/16kg', '12 C2B/PU'],
+    },
+    '16/08/2023': {
+      strength: ['12 biceps curls', '12 hollow rocks'],
+      wod: ['400m run', '12 US swings at 24/16kg', '12 C2B/PU'],
+    },
+    '18/08/2023': {
+      strength: ['12 biceps curls', '12 hollow rocks'],
+      wod: ['400m run', '12 US swings at 24/16kg', '12 C2B/PU'],
+    },
+    '21/08/2023': {
+      strength: ['12 biceps curls', '12 hollow rocks'],
+      wod: ['400m run', '12 US swings at 24/16kg', '12 C2B/PU'],
+    },
+    '23/08/2023': {
+      strength: ['12 biceps curls', '12 hollow rocks'],
+      wod: ['400m run', '12 US swings at 24/16kg', '12 C2B/PU'],
+    },
+    '25/08/2023': {
+      strength: ['12 biceps curls', '12 hollow rocks'],
+      wod: ['400m run', '12 US swings at 24/16kg', '12 C2B/PU'],
+    },
+    '28/08/2023': {
+      strength: ['12 biceps curls', '12 hollow rocks'],
+      wod: ['400m run', '12 US swings at 24/16kg', '12 C2B/PU'],
+    },
+    
   };
 
   const wod = wodData[format(selectedDate, 'dd/MM/yyyy')];

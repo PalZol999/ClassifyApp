@@ -5,6 +5,7 @@ import '../styles/Days.css';
 import Button from '@mui/material/Button';
 import { OPENING_HOURS_BEGINNING, OPENING_HOURS_END, OPENING_HOURS_INTERVAL } from '../constants/config';
 import Workout from "../components/Workout"
+import ConfirmationPopup from "../pages/ConfirmationPopup"; 
 
 
 const Calendar = () => {
@@ -12,6 +13,8 @@ const Calendar = () => {
     justDate: null,
     dateTime: null,
   });
+
+  const [showPopup, setShowPopup] = useState(false);
 
   const getTimes = () => {
     if (!date.justDate) return;
@@ -36,25 +39,42 @@ const Calendar = () => {
     setDate((prev) => ({ ...prev, justDate: null, dateTime: null }));
   };
 
+  const handleTimeClick = (time) => {
+    setDate((prev) => ({ ...prev, dateTime: time }));
+    setShowPopup(true); // Show the popup when a time is clicked
+  };
+
+  const handleYesClick = () => {
+    // Implement the logic to add the user to the class here
+    setShowPopup(false);
+  };
+  
+  const handleNoClick = () => {
+    setShowPopup(false);
+  };
+
   return (
+    
     <div className="datedisp">
-      {date.justDate ? (
+       {date.justDate ? (
         <div className="days">
           <div className='text-center pt-6'>
-          <Workout selectedDate={date.justDate} />
+            <Workout selectedDate={date.justDate} />
           </div>
-          <div className="hours flex flex-wrap justify-center">
+          <div className=" flex flex-wrap justify-center">
             <div style={{ color: 'white' }}> Choose your class:</div>
-            {times?.map((time, i) => (
+                {times?.map((time, i) => (
               <div key={`time-${i}`} className="hours">
-                <button style={{ color: 'white' }}
-                  type="button"
-                  onClick={() => setDate((prev) => ({ ...prev, dateTime: time }))}
-                >
-               {format(time, 'kk:mm')}
-                </button>
+                 <button
+            style={{ color: 'white' }}
+            type="button"
+            onClick={() => handleTimeClick(time)}
+          >
+            {format(time, 'kk:mm')}
+          </button>
               </div>
             ))}
+            
           </div>
         </div>
       ) : (
@@ -72,8 +92,18 @@ const Calendar = () => {
           </Button>
         </div>
       )}
+
+<ConfirmationPopup
+      show={showPopup}
+      onYes={handleYesClick}
+      onNo={handleNoClick}
+    />
+         
     </div>
+ 
   );
+
 };
+
 
 export default Calendar;
