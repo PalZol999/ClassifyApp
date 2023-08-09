@@ -13,11 +13,11 @@ import calendarBg from'./images/calendar-bg.png'
 
 function App() {
   return (
-    <div style={{ backgroundImage: `url(${calendarBg})`, 
+   /* <div style={{ backgroundImage: `url(${calendarBg})`, 
     backgroundSize: 'cover', 
     backgroundRepeat: 'no-repeat', 
-    height: '100vh' }}>
-
+    height: '100vh' }}>*/
+<div>
        <Helmet>
         <title>Calssify App</title>
       </Helmet>
@@ -26,16 +26,20 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/signin' element={<Signin />} />
+          <Route path='/signin' element={<Signin />}/>
           <Route
             path='/account'
             element={
               <Protected>
+                <div style={{ backgroundImage: `url(${calendarBg})`, 
+    backgroundSize: 'cover', 
+    backgroundRepeat: 'no-repeat', 
+    height: '100vh' }}>
                 <Account />
+                </div>
               </Protected>
             }
           />
-        
         </Routes>
       </AuthContextProvider>
     </div>
