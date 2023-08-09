@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/ConfirmationPopup.css"; // Create or adjust this CSS file for styling
+import "../styles/ConfirmationPopup.css";
 
 const ConfirmationPopup = ({ show, onYes, onNo }) => {
   if (!show) return null;
