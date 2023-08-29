@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import ReactCalendar from 'react-calendar';
-import { add, format } from 'date-fns';
-import '../styles/Days.css';
-import Button from '@mui/material/Button';
-import { OPENING_HOURS_BEGINNING, OPENING_HOURS_END, OPENING_HOURS_INTERVAL } from '../constants/config';
-import Workout from "../components/Workout"
-import ConfirmationPopup from "../pages/ConfirmationPopup"; 
-
+import React, { useState } from "react";
+import ReactCalendar from "react-calendar";
+import { add, format } from "date-fns";
+import "../styles/Days.css";
+import Button from "@mui/material/Button";
+import {
+  OPENING_HOURS_BEGINNING,
+  OPENING_HOURS_END,
+  OPENING_HOURS_INTERVAL,
+} from "../constants/config";
+import Workout from "../components/Workout";
+import ConfirmationPopup from "../pages/ConfirmationPopup";
 
 const Calendar = () => {
   const [date, setDate] = useState({
@@ -48,33 +51,31 @@ const Calendar = () => {
     // Implement the logic to add the user to the class here
     setShowPopup(false);
   };
-  
+
   const handleNoClick = () => {
     setShowPopup(false);
   };
 
   return (
-    
     <div className="datedisp">
-       {date.justDate ? (
+      {date.justDate ? (
         <div className="days">
-          <div className='text-center pt-6'>
+          <div className="text-center pt-6">
             <Workout selectedDate={date.justDate} />
           </div>
           <div className=" flex flex-wrap justify-center">
-            <div style={{ color: 'white' }}> Choose your class:</div>
-                {times?.map((time, i) => (
+            <div style={{ color: "white"}} className="hours"> Choose your class:</div>
+            {times?.map((time, i) => (
               <div key={`time-${i}`} className="hours">
-                 <button
-            style={{ color: 'white' }}
-            type="button"
-            onClick={() => handleTimeClick(time)}
-          >
-            {format(time, 'kk:mm')}
-          </button>
+                <button
+                  style={{ color: "white" }}
+                  type="button"
+                  onClick={() => handleTimeClick(time)}
+                >
+                  {format(time, "kk:mm")}
+                </button>
               </div>
             ))}
-            
           </div>
         </div>
       ) : (
@@ -82,7 +83,9 @@ const Calendar = () => {
           minDate={new Date()}
           className="REACT-CALENDAR p-2"
           view="month"
-          onClickDay={(date) => setDate((prev) => ({ ...prev, justDate: date }))}
+          onClickDay={(date) =>
+            setDate((prev) => ({ ...prev, justDate: date }))
+          }
         />
       )}
       {date.justDate && (
@@ -93,17 +96,13 @@ const Calendar = () => {
         </div>
       )}
 
-<ConfirmationPopup
-      show={showPopup}
-      onYes={handleYesClick}
-      onNo={handleNoClick}
-    />
-         
+      <ConfirmationPopup
+        show={showPopup}
+        onYes={handleYesClick}
+        onNo={handleNoClick}
+      />
     </div>
- 
   );
-
 };
-
 
 export default Calendar;
