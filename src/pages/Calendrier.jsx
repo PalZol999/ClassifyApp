@@ -64,7 +64,7 @@ const Calendar = () => {
             <Workout selectedDate={date.justDate} />
           </div>
           <div className=" flex flex-wrap justify-center">
-            <div style={{ color: "white"}} className="hours"> Choose your class:</div>
+            <div style={{ color: "white"}} className="hours"> Please choose your class:</div>
             {times?.map((time, i) => (
               <div key={`time-${i}`} className="hours">
                 <button
